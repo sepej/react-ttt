@@ -2,6 +2,16 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+
+function Square(props) {
+	return (
+		<div className={props.className} id={props.index}
+			onClick={props.onClick}>
+			{props.value}
+		</div>
+	);
+}
+
 class App extends Component {
   constructor (props) {
     super(props);
@@ -32,11 +42,14 @@ class App extends Component {
         "square-winner" : "square-full";
     const enabled = (this.state.winner == null && this.state.squares[i] == null) ? true : false;
     const eventHandler = (enabled)? this.handleClick : ()=>{};
+
     const output = 
-        <div className={className} id={i}
-            onClick={eventHandler}>
-            {(this.state.squares[i] != null) ? this.state.squares[i] : ""}
-        </div>;
+      <Square
+        className={className}
+        value={(this.state.squares[i] != null) ? this.state.squares[i] : ""}
+        onClick={eventHandler}
+        index={i}
+      />
     return output;
 }
 
